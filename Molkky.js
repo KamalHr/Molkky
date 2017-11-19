@@ -1,8 +1,11 @@
 class Molkky {
     constructor(name){
-        this._score = 0;
+        this.player = new Player(name, 0);
         this._quilles = [1,2,3,4,5,6,7,8,9,10,11,12];
-        this._name = name;
+        this._name = this.player.name;
+    };
+    getPlayerName() {
+        return this.player.name;
     };
     play() {
         let number = Math.floor((Math.random()*11));
@@ -16,33 +19,37 @@ class Molkky {
         }
     };
     win() {
-        if(this._score === 50){
-            console.log(`${this._name} Victoire`);
-            return `${this._name} Victoire`;
+        if(this.player.score === 50){
+            //console.log(`${this.player.name} Victoire`);
+            return `${this.player.name} Victoire`;
         }
     };
     test() {
-        if(this._score === 50)
+        if(this.player.score === 50)
             return this.win();
-        if(this._score < 50)
+        if(this.player.score < 50)
             return 'Not Yet';
-        this._score = 25;
+        this.player.score = 25;
         return 25;
     }
     fall(quilles) {
-        if(quilles.length === 1)
-            this._score += quilles[0];
-        else
-            this._score += quilles.length;
+        if(quilles.length === 1){
+            this.player.score += quilles[0];
+            console.log(this.getPlayerName()+' Scores '+quilles[0]+' new Score: '+this.player.score);
+        }
+        else{
+            this.player.score += quilles.length;
+            console.log(this.getPlayerName()+' Scores '+quilles.length+' new Score: '+this.player.score);
+        }
     };
     set score(score) {
-        this._score = score;
+        this.player.score = score;
     };
     get score() {
-        return this._score;
+        return this.player.score;
     };
     reset() {
-        this._score = 0;
+        this.player.score = 0;
     }
     _shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;

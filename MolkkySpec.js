@@ -1,14 +1,11 @@
 chai.should();
 describe('Molkky game\'s description.', () => {
     let Gamer1;
-    let Gamer2;
+    let game;
     beforeEach(() => {
-        Gamer1 = new Molkky('Player1');
-        Gamer2 = new Molkky('Player2');
-        while(Gamer1.test() != Gamer1._name+' Victoire' && Gamer2.test() != Gamer2._name+' Victoire') {
-            Gamer1.play();
-            Gamer2.play();
-        }
+        Gamer1 = new Molkky('Kamal');
+        game = new Game(['Kamal', 'Omar', 'Dan']);
+        //game.start();
     });
     it('if score == 50 then Victoire', () => {
         Gamer1.score = 50;
@@ -32,4 +29,8 @@ describe('Molkky game\'s description.', () => {
         Gamer1.fall([12,5,6,7,8]);
         Gamer1.score.should.equal(5);
     });
+    it('multiplayers, the winner is the first to acheive 50', () => {
+        let winner = game.start();
+        winner.player.score.should.equal(50);
+    })
 });
